@@ -1,0 +1,57 @@
+services:
+  tech-buy-bdd:
+    container_name: tech-buy-bdd
+    image: mariadb:11.7.2
+    environment:
+      - MYSQL_DATABASE=techbuy
+      - MYSQL_ROOT_PASSWORD=techbuy
+      - MYSQL_USER=techbuy
+      - MYSQL_PASSWORD=techbuy
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+      - ./mysql:/var/lib/mysql
+    networks:
+      - symfony
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/healthcheck.sh', '--innodb_initialized']
+      start_period: 15s
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  tech-buy-symfony:
+    container_name: tech-buy-symfony
+    image: ghcr.io/openclassrooms-student-center/tech-buy-backend:2-0-0
+    ports:
+      - 8081:8081
+    environment:
+      - DATABASE_URL=mysql://root:techbuy@tech-buy-bdd:3306/techbuy?serverVersion=8&charset=utf8mb4
+    depends_on:
+      tech-buy-bdd:
+        condition: service_healthy
+    networks:
+      - symfony
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+
+  tech-buy-angular:
+    container_name: jardin-actuel-angular
+    image: ghcr.io/openclassrooms-student-center/tech-buy-frontend:2-0-0
+    ports:
+      - 8080:80
+    networks:
+      - symfony
+    depends_on:
+      tech-buy-symfony:
+        condition: service_healthy
+          
+networks:
+  symfony:
+  
+volumes:
+  data:
