@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenClassrooms - Tech-Buy
+# Tech-Buy US
 </div>
 
 <p align="center">
@@ -11,34 +11,36 @@
   <br><br><br>
 </p>
 
-# Prérequis
-Pour démarrer cet applicatif web vous devez avoir les outils suivants:
+# Prerequisites
+To run this web application you need the following tool:
 - Docker
 
-# Installation and démarrage
-Clonez le projet pour le récupérer
-``` 
-git clone https://github.com/OpenClassrooms-Student-Center/Tech-Buy-V2.git
-cd Tech-Buy-V2
+# Installation and startup
+Clone the project to get started:
 ```
-Pour démarrer le proojet
+git clone https://github.com/jeremieborrotzu-blip/Tech-Buy-US.git
+cd Tech-Buy-US
 ```
-docker compose up -d
+To start the project:
+```
+docker compose up --build -d
 ```
 
-## Pour éteindre le projet
-Assurez vous d'être dans le dossier du projet (là où se trouve le fichier docker-compose.yml)
+The site will be available at: **http://localhost:8080**
+
+## To stop the project
+Make sure you are in the project folder (where the docker-compose.yml file is located):
 ```
 docker compose down
 ```
 
-## Fin de travail
-Si vous ne revenez pas sur le projet, vous avez la possibilité de supprimer les fichiers et images Docker afin de récupérer la place
+## End of session
+If you are done with the project, you can remove Docker files and images to free up disk space.
 
-Attention cela supprime tous les projets Docker de votre ordinateur
+Warning: this removes all Docker projects on your computer.
 
 ```
 docker system prune -a
 
-=> tapez Y puis Entrée
+=> type Y then Enter
 ```
