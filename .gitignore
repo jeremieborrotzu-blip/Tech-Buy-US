@@ -1,0 +1,8 @@
+# Database runtime data
+mysql/
+
+# System
+.DS_Store
+
+# Frontend node_modules
+frontend/node_modules/

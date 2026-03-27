@@ -41,7 +41,7 @@ services:
 
   tech-buy-angular:
     container_name: jardin-actuel-angular
-    image: ghcr.io/openclassrooms-student-center/tech-buy-frontend:2-0-0
+    build: ./frontend
     ports:
       - 8080:80
     networks:
